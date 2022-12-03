@@ -2,24 +2,25 @@ from tkinter import *
 import requests
 import json
 
+
+def showCity():
+    cityLabel = Label(root, text="City_Var").pack()
+
 root = Tk()
 root.geometry('600x400')
 
-root.title("Meteo App from Ramon&Braga o Braga&Ramon")
+root.title("Meteo App")
 root.resizable(0,0) 
 
 
-headingLabel = Label(root, text="Meteo App from Ramon&Braga o Braga&Ramon")
-headingLabel.pack()
+headingLabel = Label(root, text="Meteo App from Ramon&Braga o Braga&Ramon").pack(pady=50)
 
 
-myLabel = Label(root, text="rrcamadonna")
-myLabel.pack()
 
-canvas1 = Canvas(root, width=600, height=400)
-canvas1.pack()
-entry1 = Entry(root)
-canvas1.create_window(200, 30, window=entry1)
-
+City_Var = StringVar()
+In_City = Entry(root, textvariable = City_Var).pack()
+Button(root, command = showCity, text = "Check Weather").pack()
 
 root.mainloop()
+
+    
