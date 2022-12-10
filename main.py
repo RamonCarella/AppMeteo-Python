@@ -10,15 +10,20 @@ def showCity():
     city = In_City.get()
     url = "https://pro.openweathermap.org/data/2.5/forecast/hourly?q=" + city + "&appid=" + weatherApiKey
     data = requests.get(url).json()
-    if data["cod"] != "404":
-        y = data["list"]
-    else:
+    json_object = json.dumps(data, indent = 4) 
+    print(json_object)
+    if data["cod"] == "404":
         labelCity.config(text="ERROR 404")
         labelTemperature.config(text="")
         labelPressure.config(text="")
         labelHumidity.config(text="")
+    elif data["cod"] != "401":
+       print("Errore Invalid Key")
+    else:
+        y = data["list"]
+
     
-    labelCity.config(text=y["temp"])
+    #labelCity.config(text=y["temp"])
     """   
     #take and calculate the measures
     current_temperature = y["temp"]
