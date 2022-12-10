@@ -6,21 +6,31 @@ import json
 def showCity():
     #CityLabel.config( text = In_City.get())
     #request to the server
-    weatherApiKey = '4bae91dd2c18d69dd5371681dfe2b2ef'
+
+
+    weatherApiKey = 'ae855886b5a048dc9a8e8d9ceecc3171'
     city = In_City.get()
-    url = "https://pro.openweathermap.org/data/2.5/forecast/hourly?q=" + city + "&appid=" + weatherApiKey
-    data = requests.get(url).json()
-    json_object = json.dumps(data, indent = 4) 
-    print(json_object)
-    if data["cod"] == "404":
+    url = "https://api.weatherbit.io/v2.0/forecast/daily?city=" + city + "&key="+ weatherApiKey
+    try: #da fare il try catch
+        data = requests.get(url).json()
+        json_object = json.dumps(data, indent = 4) 
+        print(json_object)
+    catch:
+
+    #la nuova api non ha un codice errore, quindi si deve fare tutto con il try catch
+    #se non si trova la citta, la requests (riga 14) da errore
+    #le info sui campi della API a questo link:
+    #https://www.weatherbit.io/api/weather-forecast-16-day
+    if data["cod"] == 404:
         labelCity.config(text="ERROR 404")
         labelTemperature.config(text="")
         labelPressure.config(text="")
         labelHumidity.config(text="")
-    elif data["cod"] != "401":
+    elif data["cod"] == 401:
        print("Errore Invalid Key")
     else:
-        y = data["list"]
+        #y = data["list"]
+        print("\n\nSIUUUUM")
 
     
     #labelCity.config(text=y["temp"])
