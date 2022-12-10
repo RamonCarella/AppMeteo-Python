@@ -6,12 +6,20 @@ import json
 def showCity():
     #CityLabel.config( text = In_City.get())
     #request to the server
-    weatherApiKey = '68f4fa0d68fc858ac5aa55e4524ea24f'
+    weatherApiKey = '4bae91dd2c18d69dd5371681dfe2b2ef'
     city = In_City.get()
-    url = "http://api.openweathermap.org/data/2.5/weather?appid=" + weatherApiKey + "&q=" + city
+    url = "https://pro.openweathermap.org/data/2.5/forecast/hourly?q=" + city + "&appid=" + weatherApiKey
     data = requests.get(url).json()
     if data["cod"] != "404":
-        y = data["main"]
+        y = data["list"]
+    else:
+        labelCity.config(text="ERROR 404")
+        labelTemperature.config(text="")
+        labelPressure.config(text="")
+        labelHumidity.config(text="")
+    
+    labelCity.config(text=y["temp"])
+    """   
     #take and calculate the measures
     current_temperature = y["temp"]
     current_temperature -= 274.04
@@ -25,13 +33,14 @@ def showCity():
     pressure = "{:.0f}".format(current_pressure) + " atm"
     humidity = str(current_humidity) + "%"
     details = weather_description
-
+    
     #update the measures
     labelCity.config(text="Currently in " + city.upper())
     labelTemperature.config(text="Temperature: " + temperature + ", " + details)
     labelPressure.config(text="Pressure: " + pressure)
     labelHumidity.config(text="Humidity: " + humidity)
-
+    """
+    
 #setup the main sceen
 root = Tk()
 root.geometry('600x500')
