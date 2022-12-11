@@ -9,6 +9,7 @@ def showCity():
 
 
     weatherApiKey = 'ae855886b5a048dc9a8e8d9ceecc3171'
+    weatherApiKey2 = '578fc598de1f4e5a8dd96fe4b9c9d0be'
     city = In_City.get()
     url = "https://api.weatherbit.io/v2.0/forecast/daily?city=" + city + "&key="+ weatherApiKey
     
