@@ -11,16 +11,26 @@ def showCity():
     weatherApiKey = 'ae855886b5a048dc9a8e8d9ceecc3171'
     city = In_City.get()
     url = "https://api.weatherbit.io/v2.0/forecast/daily?city=" + city + "&key="+ weatherApiKey
-    try: #da fare il try catch
+    
+    #se la città inserita non esiste lo segnala
+    try:
         data = requests.get(url).json()
         json_object = json.dumps(data, indent = 4) 
-        print(json_object)
-    catch:
+        #print(json_object)
+    except:
+        #print("City doesn't exist")
+        labelCity.config(text="City doesn't exist or invalid key")
+        labelTemperature.config(text="")
+        labelPressure.config(text="")
+        labelHumidity.config(text="")
+    #else:
+    #    print("Data ok")
 
     #la nuova api non ha un codice errore, quindi si deve fare tutto con il try catch
     #se non si trova la citta, la requests (riga 14) da errore
     #le info sui campi della API a questo link:
     #https://www.weatherbit.io/api/weather-forecast-16-day
+    """
     if data["cod"] == 404:
         labelCity.config(text="ERROR 404")
         labelTemperature.config(text="")
@@ -31,7 +41,7 @@ def showCity():
     else:
         #y = data["list"]
         print("\n\nSIUUUUM")
-
+    """
     
     #labelCity.config(text=y["temp"])
     """   
