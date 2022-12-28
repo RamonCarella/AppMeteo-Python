@@ -54,46 +54,15 @@ def exctractData(data):
 def showData():
     global data, date
     x = exctractData(data["data"])[0]
-    print(x)
     labelCity.config(text=data["city_name"] + ", " + data["country_code"] + ", " + date.strftime('%Y-%m-%d'))
     labelTemperature.config(text="Temperature: " + str(x['temp']) + ", " + x['weather']['description'])
     labelPressure.config(text="Pressure: " + str(x["pres"]))
     labelHumidity.config(text="Humidity: NON LO SO")
-    """
-    if data["cod"] == 404:
-        labelCity.config(text="ERROR 404")
-        labelTemperature.config(text="")
-        labelPressure.config(text="")
-        labelHumidity.config(text="")
-    elif data["cod"] == 401:
-       print("Errore Invalid Key")
-    else:
-        #y = data["list"]
-        print("\n\nSIUUUUM")
-    """
+   
     
-    #labelCity.config(text=y["temp"])
-    """   
-    #take and calculate the measures
-    current_temperature = y["temp"]
-    current_temperature -= 274.04
-    current_pressure = y["pressure"]
-    current_pressure *= 0.0009869233
-    current_humidity = y["humidity"]
-    z = data["weather"]
-    weather_description = z[0]["description"]
-    degree_sign = u"\N{DEGREE SIGN}"
-    temperature = "{:.0f}".format(current_temperature) + degree_sign + "C"
-    pressure = "{:.0f}".format(current_pressure) + " atm"
-    humidity = str(current_humidity) + "%"
-    details = weather_description
-    
-    #update the measures
-    labelCity.config(text="Currently in " + city.upper())
-    labelTemperature.config(text="Temperature: " + temperature + ", " + details)
-    labelPressure.config(text="Pressure: " + pressure)
-    labelHumidity.config(text="Humidity: " + humidity)
-    """
+
+  
+   
 
 def changeTomorrow():
     global date
