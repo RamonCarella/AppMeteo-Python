@@ -1,7 +1,7 @@
 from tkinter import *
 import requests
 import json
-from datetime import datetime, timedelta
+from datetime import timedelta
 from datetime import date as d
 
 
@@ -34,8 +34,6 @@ def loadData():
         except:
             print("City doesn't exist or invalid key")
             labelCity.config(text="City doesn't exist or invalid key")
-        
-
     else:
         print("Data ok")
         #labelCity.config(text=data["city_name"] + ", " + data["country_code"] + ", " + date.strftime('%Y-%m-%d'))
@@ -55,7 +53,7 @@ def showData():
     global data, date
     x = exctractData(data["data"])[0]
     labelCity.config(text=data["city_name"] + ", " + data["country_code"] + ", " + date.strftime('%Y-%m-%d'))
-    labelTemperature.config(text="Temperature: " + str(x['temp']) + ", " + x['weather']['description'])
+    labelTemperature.config(text="Temperature: " + str(x['temp']) + " C°, " + x['weather']['description'])
     labelPressure.config(text="Pressure: " + str(x["pres"]))
     labelHumidity.config(text="Humidity: NON LO SO")
    
@@ -66,7 +64,7 @@ def showData():
 
 def changeTomorrow():
     global date
-    if((date - d.today()).days > 6):
+    if((date - d.today()).days >= 6):
         pass
     else:    
         date = date + timedelta(days=1)
