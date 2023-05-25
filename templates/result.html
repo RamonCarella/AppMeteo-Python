@@ -12,17 +12,20 @@
                     <h5 class="lead text-muted">Humidity: {{ humidity }}%</h5>
                     <h5 class="lead text-muted">Wind Speed: {{ wind_speed }} km/h</h5>
                     
-                    <div class="row justify-content-center">
-                        <div class="col-12 mt-3">
-                            <button type="button" class="btn btn-primary">{{day1}}</button>
-                            <button type="button" class="btn btn-primary">{{day2}}</button>
-                            <button type="button" class="btn btn-primary">{{day3}}</button>
-                            <button type="button" class="btn btn-primary">{{day4}}</button>
-                            <button type="button" class="btn btn-primary">{{day5}}</button>
-                            <button type="button" class="btn btn-primary">{{day6}}</button>
-                            <button type="button" class="btn btn-primary">{{day7}}</button>
+                    <form action="/button" method="post">
+                        <div class="row justify-content-center">
+                          <div class="col-12 mt-3">
+                            <button name="name" value="day1" type="submit" class="btn btn-primary">{{day1}}</button>
+                            <button name="name" value="day2" type="submit" class="btn btn-primary">{{day2}}</button>
+                            <button name="name" value="day3" type="submit" class="btn btn-primary">{{day3}}</button>
+                            <button name="name" value="day4" type="submit" class="btn btn-primary">{{day4}}</button>
+                            <button name="name" value="day5" type="submit" class="btn btn-primary">{{day5}}</button>
+                            <button name="name" value="day6" type="submit" class="btn btn-primary">{{day6}}</button>
+                            <button name="name" value="day7" type="submit" class="btn btn-primary">{{day7}}</button>
+                          </div>
                         </div>
-                    </div>
+                      </form>
+                      
                     
                 </div>
             </div>

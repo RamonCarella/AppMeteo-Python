@@ -5,13 +5,23 @@ from datetime import timedelta
 from datetime import date as d
 app = Flask(__name__)
 
+today = d.today()
+day1 = today
+day2 = today + timedelta(days=1)
+day3 = today + timedelta(days=2)
+day4 = today + timedelta(days=3)
+day5 = today + timedelta(days=4)
+day6 = today + timedelta(days=5)
+day7 = today + timedelta(days=6)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
   
-    currentDate = d.today()
-      
+
+   
     if request.method == "POST":
+        global city 
+        global data 
         city = request.form['city']
         weatherApiKey = 'ae855886b5a048dc9a8e8d9ceecc3171'
         weatherApiKey2 = '578fc598de1f4e5a8dd96fe4b9c9d0be'
@@ -35,19 +45,15 @@ def index():
                 print("City doesn't exist or invalid key")
 
         country_code = data['country_code']
-        extractedData = exctractData(data, currentDate)[0]
+        extractedData = exctractData(data, today)[0]
         temp = extractedData['temp']
         humidity = extractedData['rh']
         wind_speed = extractedData['wind_spd']
         description = extractedData['weather']['description']
-        print(city)
-        print(temp)
-        print(humidity)
-        print(wind_speed)
 
-
-        return render_template("result.html", temp=temp, humidity=humidity, 
-                               wind_speed=wind_speed, city=city, country_code=country_code, description=description)
+        return render_template("result.html", temp=temp, humidity=humidity,wind_speed=wind_speed, city=city, 
+                                country_code=country_code, description=description, day1=day1, day2=day2,
+                                day3=day3, day4=day4, day5=day5, day6=day6, day7=day7)
 
     return render_template("index.html")
 
@@ -56,19 +62,42 @@ def index():
 def exctractData(dataToExtract, currentDate):
     tmp = dataToExtract["data"]
     return [element for element in tmp if element['datetime'] == currentDate.strftime('%Y-%m-%d')]
-    
-   
-def changeTomorrow(currentDate):
-    if((currentDate - d.today()).days >= 6):
-        pass
-    else:    
-        currentDate = currentDate + timedelta(days=1)
-    return currentDate
 
-def changeYesterday(currentDate):
-    
-    if((currentDate - d.today()).days <= 0):
+@app.route("/button", methods=['POST'])
+def handle_button():
+    print("ciao")
+
+    button_name = request.form['name']
+
+    if button_name == 'day1':
+        extractedData = exctractData(data, day1)[0]
         pass
-    else:    
-        currentDate = currentDate - timedelta(days=1)
-    return currentDate
+    elif button_name == 'day2':
+        extractedData = exctractData(data, day2)[0]
+        pass
+    elif button_name == 'day3':
+        extractedData = exctractData(data, day3)[0]
+        pass
+    elif button_name == 'day4':
+        extractedData = exctractData(data, day4)[0]
+        pass
+    elif button_name == 'day5':
+        extractedData = exctractData(data, day5)[0]
+        pass
+    elif button_name == 'day6':
+        extractedData = exctractData(data, day6)[0]
+        pass
+    elif button_name == 'day7':
+        extractedData = exctractData(data, day7)[0]
+        pass
+    
+    country_code = data['country_code']
+    temp = extractedData['temp']
+    humidity = extractedData['rh']
+    wind_speed = extractedData['wind_spd']
+    description = extractedData['weather']['description']
+
+    return render_template("result.html", temp=temp, humidity=humidity,wind_speed=wind_speed, city=city, 
+                                country_code=country_code, description=description, day1=day1, day2=day2,
+                                day3=day3, day4=day4, day5=day5, day6=day6, day7=day7)
+
