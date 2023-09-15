@@ -6,13 +6,7 @@ from datetime import date as d
 app = Flask(__name__)
 
 today = d.today()
-day1 = today
-day2 = today + timedelta(days=1)
-day3 = today + timedelta(days=2)
-day4 = today + timedelta(days=3)
-day5 = today + timedelta(days=4)
-day6 = today + timedelta(days=5)
-day7 = today + timedelta(days=6)
+day = [today + timedelta(days=i) for i in range(7)]
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -52,8 +46,8 @@ def index():
         description = extractedData['weather']['description']
 
         return render_template("result.html", temp=temp, humidity=humidity,wind_speed=wind_speed, city=city, 
-                                country_code=country_code, description=description, day1=day1, day2=day2,
-                                day3=day3, day4=day4, day5=day5, day6=day6, day7=day7)
+                                country_code=country_code, description=description, day1=day[0], day2=day[1],
+                                day3=day[2], day4=day[3], day5=day[4], day6=day[5], day7=day[6])
 
     return render_template("index.html")
 
@@ -68,28 +62,11 @@ def handle_button():
     print("ciao")
 
     button_name = request.form['name']
+    button_name = button_name[-1]
 
-    if button_name == 'day1':
-        extractedData = exctractData(data, day1)[0]
-        pass
-    elif button_name == 'day2':
-        extractedData = exctractData(data, day2)[0]
-        pass
-    elif button_name == 'day3':
-        extractedData = exctractData(data, day3)[0]
-        pass
-    elif button_name == 'day4':
-        extractedData = exctractData(data, day4)[0]
-        pass
-    elif button_name == 'day5':
-        extractedData = exctractData(data, day5)[0]
-        pass
-    elif button_name == 'day6':
-        extractedData = exctractData(data, day6)[0]
-        pass
-    elif button_name == 'day7':
-        extractedData = exctractData(data, day7)[0]
-        pass
+    button = int(button_name) -1
+
+    extractedData = exctractData(data, day[button])[0]
     
     country_code = data['country_code']
     temp = extractedData['temp']
@@ -98,6 +75,6 @@ def handle_button():
     description = extractedData['weather']['description']
 
     return render_template("result.html", temp=temp, humidity=humidity,wind_speed=wind_speed, city=city, 
-                                country_code=country_code, description=description, day1=day1, day2=day2,
-                                day3=day3, day4=day4, day5=day5, day6=day6, day7=day7)
+                                country_code=country_code, description=description, day1=day[0], day2=day[1],
+                                day3=day[2], day4=day[3], day5=day[4], day6=day[5], day7=day[6])
 
